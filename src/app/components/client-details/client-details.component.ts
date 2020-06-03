@@ -1,4 +1,9 @@
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Client } from './../../models/client';
+import { ClientService } from './../../services/client.service';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-client-details',
@@ -6,10 +11,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./client-details.component.css']
 })
 export class ClientDetailsComponent implements OnInit {
+  id: string;
+  client: Client;
+  hasBalance: boolean;
+  ShowBalanceUpdateInput: false;
 
-  constructor() { }
+  constructor(
+    private cliServy: ClientService,
+    private flashyM: FlashMessagesService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    // Get the id from a url with the statement below
+    // this.id = this.route.snapshot.paramMap.get('id');
+    this.id = this.route.snapshot.params['id'];
+
+
+    // Get client
+    this.cliServy.getClient(this.id).subscribe(client => {
+      if (client != null) {
+        if (client.balance > 0) {
+          this.hasBalance = true;
+        }
+      }
+      this.client = client;
+    });
+
+  }
+
+  onDelClick() {
+    return;
   }
 
 }

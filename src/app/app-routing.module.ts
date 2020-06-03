@@ -16,9 +16,9 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'client/add', component: AddClientFormComponent },
   { path: 'client/edit/:id', component: EditClientFormComponent },
-  { path: 'client/:id', component: ClientDetailsComponent},
-  { path: 'client/add', component: AddClientFormComponent},
+  { path: 'client/:id', component: ClientDetailsComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: NotFoundComponent },
