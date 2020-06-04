@@ -8,10 +8,11 @@
   </div>
 </div>
 <table
-*ngIf="clients.length > 0; else noClient"
+*ngIf="clients?.length > 0; else noClients"
 class="table table-striped"
 >
-<thead *ngIf="clients">
+<!-- *ngIf="clients" -->
+<thead class="thead-inverse" >
   <tr>
     <th>Name</th>
     <th>Email</th>
@@ -29,7 +30,7 @@ class="table table-striped"
 </tbody>
 </table>
 
-<ng-template #noClient>
+<ng-template #noClients>
   <hr>
   <h4><i>There are no clients in the system</i></h4>
 </ng-template>

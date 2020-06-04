@@ -1,5 +1,5 @@
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Client } from './../../models/client';
 import { ClientService } from './../../services/client.service';
 import { Component, OnInit } from '@angular/core';

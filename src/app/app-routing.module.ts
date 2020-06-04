@@ -1,3 +1,5 @@
+import { RegisterGuard } from './components/guard/register.guard';
+import { AuthGuard } from './components/guard/auth.guard';
 
 import { SettingsComponent } from './components/settings/settings.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -13,19 +15,23 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 
+
+
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
+  { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'client/add', component: AddClientFormComponent },
-  { path: 'client/edit/:id', component: EditClientFormComponent },
-  { path: 'client/:id', component: ClientDetailsComponent },
-  { path: 'settings', component: SettingsComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'client/add', component: AddClientFormComponent, canActivate: [AuthGuard] },
+  { path: 'client/edit/:id', component: EditClientFormComponent, canActivate: [AuthGuard] },
+  { path: 'client/:id', component: ClientDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: 'register', component: RegisterComponent, canActivate:[RegisterGuard] },
   { path: '**', component: NotFoundComponent },
+
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard, RegisterGuard]
 })
 export class AppRoutingModule { }

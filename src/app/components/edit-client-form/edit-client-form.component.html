@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6">
-    <a  routerLink="/client/{{id}}" class="btn btn-link">
+    <a  routerLink="/client/{{id}}"  class="btn btn-link">
     <i class="fa fa-arrow-circle-o-left"></i>
     Back to Client
   </a>
@@ -101,7 +101,7 @@
         balance = "ngModel"
         [(ngModel)] = "client.balance"
         type="number"
-        [disabled] = "!disableBalanceOnEdit"
+        [disabled] = "disableBalanceOnEdit"
         >
       </div>
       <input type="submit" value="Submit" class="btn btn-primary btn-block">

@@ -1,3 +1,4 @@
+import { SettingsService } from './../../services/settings.service';
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -19,13 +20,14 @@ export class EditClientFormComponent implements OnInit {
     balance: 0
   };
 
-  disableBalanceOnEdit = true;
+  disableBalanceOnEdit: boolean;
 
   constructor(
     private cliServy: ClientService,
     private flashyM: FlashMessagesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private settingService: SettingsService
   ) { }
 
   // ngOnInit(): void {
@@ -35,6 +37,7 @@ export class EditClientFormComponent implements OnInit {
 
 
   ngOnInit() {
+    this.disableBalanceOnEdit = this.settingService.getSettings().disableBalanceOnEdit;
     // Get the id from a url with the statement below
     // this.id = this.route.snapshot.paramMap.get('id');
     // this.route.paramMap.subscribe(params => { this.id = params.get('id') });
@@ -54,7 +57,7 @@ export class EditClientFormComponent implements OnInit {
       // Update the client but first add the id
       value.id = this.id;
       this.cliServy.updateClientBalance(value);
-      this.flashyM.show('For updated successfully', {
+      this.flashyM.show('Client details updated successfully', {
         cssClass: 'alert-success', timeout: 3000
       });
 

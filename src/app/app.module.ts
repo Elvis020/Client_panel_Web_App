@@ -1,10 +1,12 @@
+import { SettingsService } from './services/settings.service';
+import { AuthService } from './services/auth.service';
 import { ClientService } from './services/client.service';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AngularFireModule} from 'angularfire2';
-import { AngularFirestoreModule} from 'angularfire2/firestore';
-import { AngularFireAuthModule} from 'angularfire2/auth';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,8 +22,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import 'rxjs';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+
+
 
 
 
@@ -50,7 +54,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
     FlashMessagesModule.forRoot(),
 
   ],
-  providers: [ClientService],
+  providers: [ClientService, AuthService, SettingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

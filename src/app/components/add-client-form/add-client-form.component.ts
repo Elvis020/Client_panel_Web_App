@@ -1,9 +1,9 @@
+import { SettingsService } from './../../services/settings.service';
 import { Router } from '@angular/router';
 import { ClientService } from './../../services/client.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Client } from './../../models/client';
 import { Component, OnInit, ViewChild } from '@angular/core';
-
 
 
 @Component({
@@ -26,10 +26,12 @@ export class AddClientFormComponent implements OnInit {
   constructor(
     private flashymsg: FlashMessagesService,
     private clienteleServy: ClientService,
-    private routyR: Router
-    ) { }
+    private routyR: Router,
+    private settingService: SettingsService
+  ) { }
 
   ngOnInit(): void {
+    this.disableBalanceOnAdd = this.settingService.getSettings().disableBalanceOnAdd
   }
 
   onSubmit({ value, valid }: { value: Client, valid: boolean }) {
@@ -39,12 +41,12 @@ export class AddClientFormComponent implements OnInit {
 
     if (!valid) {
       // Show error message
-      this.flashymsg.show('Please fill out the form correctly', {cssClass: 'alert-danger', timeout: 4000});
+      this.flashymsg.show('Please fill out the form correctly', { cssClass: 'alert-danger', timeout: 4000 });
     } else {
       // Add new
       this.clienteleServy.addNewClient(value);
       // Show message
-      this.flashymsg.show('New Client Added', {cssClass: 'alert-success', timeout: 4000});
+      this.flashymsg.show('New Client Added', { cssClass: 'alert-success', timeout: 4000 });
       // Redirect to dashboard
       this.routyR.navigate(['/']);
     }
