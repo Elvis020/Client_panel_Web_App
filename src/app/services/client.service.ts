@@ -53,5 +53,16 @@ export class ClientService {
   }
 
 
+  // A method to update the balance of a client
+  updateClientBalance(client: Client) {
+    this.clientsDoc = this.angfireStore.doc<Client>(`clients/${client.id}`);
+    this.clientsDoc.update(client);
+  }
 
+  // Amethod to delete CLient data and metadata from the Client Array
+  delClientfromSery(client: Client) {
+    this.clientsDoc = this.angfireStore.doc<Client>(`clients/${client.id}`);
+    this.clientsDoc.delete();
+
+  }
 }

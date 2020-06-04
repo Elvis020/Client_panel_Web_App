@@ -14,7 +14,7 @@ export class ClientDetailsComponent implements OnInit {
   id: string;
   client: Client;
   hasBalance: boolean;
-  ShowBalanceUpdateInput: false;
+  ShowBalanceUpdateInput = false;
 
   constructor(
     private cliServy: ClientService,
@@ -31,18 +31,31 @@ export class ClientDetailsComponent implements OnInit {
 
     // Get client
     this.cliServy.getClient(this.id).subscribe(client => {
-      if (client != null) {
-        if (client.balance > 0) {
-          this.hasBalance = true;
-        }
+      if (client.balance > 0) {
+        this.hasBalance = true;
       }
+
       this.client = client;
     });
 
   }
 
   onDelClick() {
-    return;
+    if (confirm('Are you sure?')) {
+      this.cliServy.delClientfromSery(this.client);
+      this.flashyM.show('Client removed', {
+        cssClass: 'alert-success', timeout: 4000
+      });
+      this.router.navigate(['/']);
+    }
+  }
+
+  updateBalance() {
+    this.cliServy.updateClientBalance(this.client);
+    this.flashyM.show('Balance Updated', {
+      cssClass: 'alert-success', timeout: 4000
+    });
+
   }
 
 }
